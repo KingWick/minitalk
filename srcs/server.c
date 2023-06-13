@@ -6,19 +6,25 @@
 /*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/05/31 00:50:04 by akram            ###   ########.fr       */
+/*   Updated: 2023/06/12 18:45:24 by akram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minitalk.h"
-#include <stdio.h>
-#include <unistd.h>
+#include "minitalk.h"
 
+void handler()
+{
+    write(STDOUT_FILENO, "I won't die\n", 13);
+}
 
-int main(int ac, char **av)
+int main()
 {
     int pid;
-    
+    signal(SIGINT, handler);
     pid = getpid();
-    printf("PID == %d", pid);
+    while (1)
+    {
+        printf("le PID vaut == %d\n", pid);
+        sleep(1);
+    }
 }

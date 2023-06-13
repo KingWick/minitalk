@@ -6,13 +6,15 @@
 #    By: akram <akram@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 00:35:09 by akram             #+#    #+#              #
-#    Updated: 2023/05/31 00:45:45 by akram            ###   ########.fr        #
+#    Updated: 2023/06/04 19:11:42 by akram            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		= 	srcs/server.c \
-				srcs/client.c \
-
+				ft_printf/ft_toolbox.c \
+				ft_printf/ft_toolbox1.c \
+				ft_printf/ft_printf.c \
+				
 
 OBJS 		= ${SRCS:.c=.o}
 INCLUDES	= includes/
@@ -24,7 +26,7 @@ RM			= rm -f
 all: 		${NAME}
 
 %.o: %.c ./includes/minitalk.h
-			${CC} ${CFLAGS} -I$(INCLUDES) -Imlx -Ibass -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
 			@printf "\e[?25l\e[JCreated \e[92m$(notdir $@)\e[0m\r"
 
 $(NAME): $(OBJS) 
