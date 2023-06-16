@@ -6,21 +6,26 @@
 /*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/06/12 18:45:24 by akram            ###   ########.fr       */
+/*   Updated: 2023/06/15 19:55:26 by akram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void handler()
+void handler(int i)
 {
-    write(STDOUT_FILENO, "I won't die\n", 13);
+    (void)i;
+    write(STDOUT_FILENO, "Fuck you\n", 13);
 }
 
 int main()
 {
     int pid;
-    signal(SIGINT, handler);
+    int *p = NULL;
+    p = malloc(sizeof(*p));
+    signal(SIGINT, &handler);
+    
+
     pid = getpid();
     while (1)
     {
