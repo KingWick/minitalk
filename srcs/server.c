@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/06/15 19:55:26 by akram            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:34:16 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void handler(int i)
 {
-    (void)i;
-    write(STDOUT_FILENO, "Fuck you\n", 13);
+	if (i == SIGUSR1)
+	{
+		
+		printf("signal SIGUSER1 recu\n");
+	}
+	else if (i == SIGUSR2)
+	{
+		
+		printf("signal SIGUSER2 recu\n");
+	}
 }
+
 
 int main()
 {
-    int pid;
-    int *p = NULL;
-    p = malloc(sizeof(*p));
-    signal(SIGINT, &handler);
-    
-
-    pid = getpid();
-    while (1)
-    {
-        printf("le PID vaut == %d\n", pid);
-        sleep(1);
-    }
+	signal(SIGUSR1, handler);
+	signal(SIGUSR2, handler);
+	
+	printf("The server pid is %d\n", getpid());
+	while (1)
+	{
+		pause();
+	}
+	
 }
