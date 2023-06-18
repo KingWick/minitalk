@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 19:54:27 by akram             #+#    #+#             */
-/*   Updated: 2023/06/16 17:26:25 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/06/18 01:12:23 by akram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@ void ft_decode(int pid, int byte)
 	while (byte != 0 || i < 8)
 	{
 		if (byte % 2)
-		{
 			kill(pid, SIGUSR1);
-		}
 		else
-		{
-			kill(pid,SIGUSR2);
-		}
+			kill(pid, SIGUSR2);
 		byte = byte >> 1;
 		i++;
-
+		usleep(100);
 	}
 }
 
@@ -40,15 +36,19 @@ void	ft_send(int pid, char *str)
 
 	while (str[i])
 	{
-		ft_decode(str[i], pid);
+		ft_decode(pid, str[i]);
 		i++;
 	}
+	ft_decode(pid, '\0');
 }
 
 int main(int ac, char **av)
 {
     if (ac != 3)
 	{
-		ft_printf("E")
+		ft_printf("\033[91mError\033[0m\n");
+		ft_printf("\033[33mTry: ./client [PID] [MESSAGE]\033[0m\n");
+		return (1);
 	}
+	ft_send(atoi(av[1]), av[2]);
 }
