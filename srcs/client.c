@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 19:54:27 by akram             #+#    #+#             */
-/*   Updated: 2023/06/18 01:12:23 by akram            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:35:56 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void ft_decode(int pid, int byte)
 		else
 			kill(pid, SIGUSR2);
 		byte = byte >> 1;
+		usleep(1000);
 		i++;
-		usleep(100);
 	}
 }
 

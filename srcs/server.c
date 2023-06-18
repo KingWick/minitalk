@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/06/18 01:46:04 by akram            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:39:27 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,44 +34,45 @@ int ft_recode(int bit)
 	return (-1);
 }
 
-// void ft_handler(int i)
-// {
-// 	int byte;
+void ft_handler(int i)
+{
+	int byte;
 
-// 	byte = ft_recode(i);
-// 	if (byte > 0)
-// 		ft_printf("%c", byte);
-// 	if (byte == '\0')
-// 		ft_printf("\n");
-// }
+	byte = ft_recode(i);
+	if (byte > 0)
+		ft_printf("%c", byte);
+	if (byte == '\0')
+		ft_printf("\n");
+}
 
 //-------handler version tableau deja pret----------//
 
-void ft_handler(int i)
-{
-	char str[256];
-	static int index = 0;
+// void ft_handler(int i)
+// {
+// 	char str[256];
+// 	static int index = 0;
 	
-	int byte = ft_recode(i);
+// 	int byte = ft_recode(i);
 	
-	if (byte > 0)
-	{
-		str[index] = byte;
-		index++;
-	}
+// 	if (byte > 0)
+// 	{
+// 		str[index] = byte;
+// 		index++;
+// 	}
 	
-	if (byte == '\0')
-	{
-		str[index] = '\0';
-		ft_printf("%s\n", str);
-		index = 0;
-	}
-}
+// 	if (byte == '\0')
+// 	{
+// 		str[index] = '\0';
+// 		ft_printf("%s\n", str);
+// 		index = 0;
+// 	}
+// }
 
 
 int main()
 {
 	ft_printf("The server pid is : %d\n", getpid());
+	
 	signal(SIGUSR1, ft_handler);
 	signal(SIGUSR2, ft_handler);
 	
