@@ -6,7 +6,7 @@
 /*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 19:54:27 by akram             #+#    #+#             */
-/*   Updated: 2023/06/18 16:35:56 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:04:57 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void ft_decode(int pid, int byte)
 		else
 			kill(pid, SIGUSR2);
 		byte = byte >> 1;
-		usleep(1000);
+		usleep(20);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akram <akram@student.42.fr>                +#+  +:+       +#+         #
+#    By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 00:35:09 by akram             #+#    #+#              #
-#    Updated: 2023/06/15 21:41:33 by akram            ###   ########.fr        #
+#    Updated: 2023/06/19 14:12:33 by akdjebal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME_CLIENT	= client
 NAME_SERVER	= server
 NAME  		= minitalk
 CC 			= clang
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 RM			= rm -f
 
 GREY=\033[0;37m
