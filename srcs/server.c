@@ -6,19 +6,18 @@
 /*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/06/19 14:37:35 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:50:53 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-
-int ft_recode(int bit)
+int	ft_recode(int bit)
 {
-	static int i;
-	static int byte;
-	char res;
-	
+	static int	i;
+	static int	byte;
+	char		res;
+
 	if (bit == SIGUSR1)
 		bit = 1;
 	else if (bit == SIGUSR2)
@@ -35,84 +34,64 @@ int ft_recode(int bit)
 	return (-1);
 }
 
-void ft_handler(int i)
+void	ft_handler(int i)
 {
-	int byte;
+	int	byte;
+
 	byte = ft_recode(i);
 	if (byte > 0)
 		ft_fill_list(byte);
 	if (byte == '\0')
 		ft_print_list();
 }
-// 
-//-------handler version tableau deja pret----------//
 
-
-void ft_print_list()
+void	ft_print_list(void)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
-	tmp = env->head;
+	tmp = g_env->head;
 	while (tmp)
 	{
 		ft_printf("%c", tmp->data);
 		tmp = tmp->next;
 	}
 	printf("\n");
-	env->head = NULL;
-	env->last = NULL;
+	g_env->head = NULL;
+	g_env->last = NULL;
 }
 
-void ft_fill_list(int octet)
+void	ft_fill_list(int octet)
 {
-	t_list *new;
-	
+	t_list	*new;
+
 	new = malloc(sizeof(t_list));
-	
+	// if (!new)
+	// 	return (NULL);
 	new->data = octet;
 	new->next = NULL;
-
-	if (env->head == NULL)
+	if (g_env->head == NULL)
 	{
-		env->head = new;
-		env->last = new;
+		g_env->head = new;
+		g_env->last = new;
 	}
 	else
 	{
-		env->last->next = new;
-		env->last = env->last->next;
+		g_env->last->next = new;
+		g_env->last = g_env->last->next;
 	}
-	
-
-	// char str[256];
-	// static int index = 0;
-	
-	// int byte = ft_recode(i);
-	
-	// if (byte > 0)
-	// {
-	// 	str[index] = byte;
-	// 	index++;
-	// }
-	
-	// if (byte == '\0')
-	// {
-	// 	str[index] = '\0';
-	// 	ft_printf("%s\n", str);
-	// 	index = 0;
-	// }
 }
 
-
-int main()
+int	main(void)
 {
-	env = malloc(sizeof(t_env));
-	env->head = NULL;
-	env->last = NULL;
+	g_env = malloc(sizeof(t_env));
+	// if (!g_env)
+	// 	return (NULL);
+	g_env->head = NULL;
+	g_env->last = NULL;
 	ft_printf("The server pid is : %d\n", getpid());
-	
 	signal(SIGUSR1, ft_handler);
 	signal(SIGUSR2, ft_handler);
-	
-	while (1){}
+	while (1)
+	{
+	}
 }
