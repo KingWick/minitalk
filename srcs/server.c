@@ -6,7 +6,7 @@
 /*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/07/11 20:11:31 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/11 20:23:53 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void ft_clean_list(t_list *list)
 {
-	if (list->next)
+	if (list && list->next)
 		ft_clean_list(list->next);
 	free(list);
 	list = NULL;

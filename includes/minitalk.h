@@ -6,7 +6,7 @@
 /*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 23:57:47 by akram             #+#    #+#             */
-/*   Updated: 2023/07/11 20:01:43 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/11 20:37:23 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
+
 
 struct s_env	g_env;
 

@@ -6,7 +6,7 @@
 /*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 19:54:27 by akram             #+#    #+#             */
-/*   Updated: 2023/07/10 18:56:04 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/11 20:51:49 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,40 @@
 // La variable i est utilisée pour suivre le nombre de bits déjà envoyés. Lorsque i atteint la valeur 8, cela signifie que tous les 8 bits ont été envoyés.
 // En résumé, la condition while (byte != 0 || i < 8) garantit que tous les bits de l'octet sont envoyés avant de sortir de la boucle,
 // évitant ainsi la perte de données ou l'envoi incomplet de l'octet.
+
+
+//remplacer atoi par mon atoi
+
+long	ft_atoi(char *str)
+{
+	int		sign;
+	long	result;
+
+	sign = 1;
+	result = 0;
+	if (!(*str >= '0' && *str <= '9'))
+	{
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
+	// while (*str == ' ' || (*str >= 9 && *str <= 13))
+	// 	str++;
+	// if (*str == '-')
+	// 	sign = -1;
+	// if (*str == '-' || *str == '+')
+	// 	str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		if ((result * sign) <= 0 || (result * sign) > INT_MAX)
+		{
+			write(2, "Error\n", 6);
+			exit(EXIT_FAILURE);
+		}
+		str++;
+	}
+	return (result * sign);
+}
 
 void	ft_decode(int pid, int byte)
 {
@@ -61,5 +95,5 @@ int	main(int ac, char **av)
 		ft_printf("\033[33mTry: ./client [PID] [MESSAGE]\033[0m\n");
 		return (1);
 	}
-	ft_send(atoi(av[1]), av[2]);
+	ft_send(ft_atoi(av[1]), av[2]);
 }
