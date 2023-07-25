@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/07/11 20:23:53 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:49:52 by akram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
 
 void ft_clean_list(t_list *list)
 {
@@ -64,7 +63,7 @@ void	ft_print_list(void)
 		ft_printf("%c", tmp->data);
 		tmp = tmp->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 	
 	ft_clean_list(g_env.head);
 	g_env.head = NULL;
@@ -72,13 +71,13 @@ void	ft_print_list(void)
 
 }
 
-void	ft_fill_list(int octet)
+t_list	*ft_fill_list(int octet)
 {
 	t_list	*new;
 
 	new = malloc(sizeof(t_list));
-	// if (!new)
-	// 	return (NULL);
+	if (!new)
+		return (NULL);
 	new->data = octet;
 	new->next = NULL;
 	if (g_env.head == NULL)
@@ -91,12 +90,11 @@ void	ft_fill_list(int octet)
 		g_env.last->next = new;
 		g_env.last = g_env.last->next;
 	}
+	return (new);
 }
 
 int	main(void)
 {
-	// if (!g_env)
-	// 	return (NULL);
 	g_env.head = NULL;
 	g_env.last = NULL;
 	ft_printf("The server pid is : %d\n", getpid());

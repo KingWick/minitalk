@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 23:57:47 by akram             #+#    #+#             */
-/*   Updated: 2023/07/11 20:37:23 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:00:26 by akram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ typedef struct s_env
 	struct s_list	*last;
 }				t_env;
 
+t_list	*ft_fill_list(int octet);
 void	ft_handler(int i);
-void	ft_fill_list(int octet);
 void	ft_print_list(void);
 void	ft_clean_list(t_list *list);
+void	ft_decode(int pid, int byte);
+int		ft_recode(int bit);
+void	ft_send(int pid, char *str);
+
 
 #endif

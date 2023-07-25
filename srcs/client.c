@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 19:54:27 by akram             #+#    #+#             */
-/*   Updated: 2023/07/11 20:51:49 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:25:02 by akram            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 // évitant ainsi la perte de données ou l'envoi incomplet de l'octet.
 
 
-//remplacer atoi par mon atoi
-
 long	ft_atoi(char *str)
 {
 	int		sign;
@@ -38,12 +36,6 @@ long	ft_atoi(char *str)
 		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	// while (*str == ' ' || (*str >= 9 && *str <= 13))
-	// 	str++;
-	// if (*str == '-')
-	// 	sign = -1;
-	// if (*str == '-' || *str == '+')
-	// 	str++;
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + *str - '0';
@@ -95,5 +87,15 @@ int	main(int ac, char **av)
 		ft_printf("\033[33mTry: ./client [PID] [MESSAGE]\033[0m\n");
 		return (1);
 	}
-	ft_send(ft_atoi(av[1]), av[2]);
+	else
+	{
+		int pid = ft_atoi(av[1]);
+		if (kill(pid,0) <= -1)
+		{ 
+			ft_printf("\033[91mError\033[0m\n");
+        	ft_printf("\033[33mThe PID: %s is invalid\033[0m\n", av[1]);
+        	return (1);
+		}
+		ft_send(ft_atoi(av[1]), av[2]);
+	}
 }
