@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akram <akram@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/07/25 21:49:52 by akram            ###   ########.fr       */
+/*   Updated: 2023/07/26 15:06:22 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+// exit 130 = control+c
+// exit 148 = control+z
+
+void	terminate(int code)	
+{
+	ft_clean_list(g_env.head);
+	if (code == 2)
+		exit(130);
+	exit(131);
+}
 
 void ft_clean_list(t_list *list)
 {
@@ -46,6 +57,8 @@ void	ft_handler(int i)
 {
 	int	byte;
 
+	if (i == SIGINT || i == SIGQUIT)
+		terminate(i);
 	byte = ft_recode(i);
 	if (byte > 0)
 		ft_fill_list(byte);
@@ -100,6 +113,8 @@ int	main(void)
 	ft_printf("The server pid is : %d\n", getpid());
 	signal(SIGUSR1, ft_handler);
 	signal(SIGUSR2, ft_handler);
+	signal(SIGINT, ft_handler);
+	signal(SIGQUIT, ft_handler);
 	while (1)
 	{
 	}
