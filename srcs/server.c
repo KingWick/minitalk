@@ -6,16 +6,15 @@
 /*   By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:01:56 by akram             #+#    #+#             */
-/*   Updated: 2023/07/26 15:06:22 by akdjebal         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:57:20 by akdjebal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-// exit 130 = control+c
-// exit 148 = control+z
+struct s_env	g_env;
 
-void	terminate(int code)	
+void	terminate(int code)
 {
 	ft_clean_list(g_env.head);
 	if (code == 2)
@@ -23,47 +22,12 @@ void	terminate(int code)
 	exit(131);
 }
 
-void ft_clean_list(t_list *list)
+void	ft_clean_list(t_list *list)
 {
 	if (list && list->next)
 		ft_clean_list(list->next);
 	free(list);
 	list = NULL;
-}	
-
-int	ft_recode(int bit)
-{
-	static int	i;
-	static int	byte;
-	char		res;
-
-	if (bit == SIGUSR1)
-		bit = 1;
-	else if (bit == SIGUSR2)
-		bit = 0;
-	byte = byte + (bit << i);
-	i++;
-	if (i == 8)
-	{
-		res = byte;
-		byte = 0;
-		i = 0;
-		return (res);
-	}
-	return (-1);
-}
-
-void	ft_handler(int i)
-{
-	int	byte;
-
-	if (i == SIGINT || i == SIGQUIT)
-		terminate(i);
-	byte = ft_recode(i);
-	if (byte > 0)
-		ft_fill_list(byte);
-	if (byte == '\0')
-		ft_print_list();
 }
 
 void	ft_print_list(void)
@@ -76,12 +40,9 @@ void	ft_print_list(void)
 		ft_printf("%c", tmp->data);
 		tmp = tmp->next;
 	}
-	ft_printf("\n");
-	
 	ft_clean_list(g_env.head);
 	g_env.head = NULL;
 	g_env.last = NULL;
-
 }
 
 t_list	*ft_fill_list(int octet)

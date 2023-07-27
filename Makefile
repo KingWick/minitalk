@@ -6,12 +6,12 @@
 #    By: akdjebal <akdjebal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 00:35:09 by akram             #+#    #+#              #
-#    Updated: 2023/07/11 19:32:10 by akdjebal         ###   ########.fr        #
+#    Updated: 2023/07/27 17:58:05 by akdjebal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_CLIENT	= srcs/client.c ft_printf/ft_toolbox.c ft_printf/ft_toolbox1.c ft_printf/ft_printf.c
-SRCS_SERVER	= srcs/server.c ft_printf/ft_toolbox.c ft_printf/ft_toolbox1.c ft_printf/ft_printf.c
+SRCS_SERVER	= srcs/server.c srcs/tools.c ft_printf/ft_toolbox.c ft_printf/ft_toolbox1.c ft_printf/ft_printf.c
 
 OBJS_CLIENT	= ${SRCS_CLIENT:.c=.o}
 OBJS_SERVER	= ${SRCS_SERVER:.c=.o}
@@ -40,7 +40,6 @@ all: $(NAME_CLIENT) $(NAME_SERVER)
 
 %.o: %.c ./includes/minitalk.h
 	${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
-
 
 $(NAME_SERVER): $(OBJS_SERVER)
 	${CC} -o $(NAME_SERVER) $(OBJS_SERVER)
